@@ -17,12 +17,12 @@
   <body>
     <div id="hello-plan"></div>
     <script type="module">
-      // Create publishable access token at https://developers.archilogic.com/access-tokens.html
-      const publishableToken = 'd3860d6c-e26e-4934-bd5e-d2f7f707e077'
+      // Token Access ID
+      const publishableToken = '0316eda6-3306-44fb-a92c-e670872db0be';
       const startupSettings = {}
-      const demoSceneId = 'a9aaafdf-d5b6-4b4a-82a0-9efb6d5b155a'
-      const container = document.getElementById('hello-plan')
-      const floorPlan = new FloorPlanEngine(container, startupSettings)
+      const demoSceneId = '6cc487cb-46b6-40f2-b807-b6c02c01087d';
+      const container = document.getElementById('hello-plan');
+      const floorPlan = new FloorPlanEngine(container, startupSettings);
       floorPlan.loadScene(demoSceneId, { publishableToken }).then(async () => {
         const assets = floorPlan.resources.assets
         const tables = assets.filter((el) => el.tags.includes('table'))
