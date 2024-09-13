@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="utf-8" />
+  <title>fpe hello world demo</title>
+  <script src="https://code.archilogic.com/fpe-sdk/v3.1.x/fpe.js"></script>
+  <style>
+    #hello-plan {
+      height: 100%;
+    }
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <body>
+    <div id="hello-plan"></div>
+    <script type="module">
+      // Create publishable access token at https://developers.archilogic.com/access-tokens.html
+      const publishableToken = 'd3860d6c-e26e-4934-bd5e-d2f7f707e077'
+      const startupSettings = {}
+      const demoSceneId = 'a9aaafdf-d5b6-4b4a-82a0-9efb6d5b155a'
+      const container = document.getElementById('hello-plan')
+      const floorPlan = new FloorPlanEngine(container, startupSettings)
+      floorPlan.loadScene(demoSceneId, { publishableToken }).then(async () => {
+        const assets = floorPlan.resources.assets
+        const tables = assets.filter((el) => el.tags.includes('table'))
+        while (true) {
+          const table = tables[Math.floor(Math.random() * tables.length)]
+          await floorPlan.zoomToElement(table.id, 5, 3000)
+          await floorPlan.zoomExtents(2, 3000)
+          await wait(500)
+        }
+      })
+
+      function wait(t = 100) {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(true)
+          }, t)
+        })
+      }
+    </script>
+  </body>
+</html>
